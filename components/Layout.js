@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-const API = 'http://localhost:5000/api/v1';
-
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
 export default function Layout({ children, currentPage }) {
   const [categories, setCategories] = useState([]);
   const [username, setUsername] = useState('');
@@ -144,8 +143,8 @@ function AddTaskModal({ categories, catColors, onClose, onAdded }) {
   async function handleSubmit() {
     if (!form.title.trim()) return alert('Title is required');
     const url = form.category_id
-      ? `http://localhost:5000/api/v1/tasks/categories/${form.category_id}/tasks`
-      : `http://localhost:5000/api/v1/tasks`;
+  ? `${API}/tasks/categories/${form.category_id}/tasks`
+  : `${API}/tasks`;
     await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
