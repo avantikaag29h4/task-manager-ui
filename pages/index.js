@@ -7,7 +7,7 @@ export default function Login() {
   const router = useRouter();
 
   async function handleLogin() {
-    const res = await fetch('http://localhost:5000/api/v1/auth/login', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
