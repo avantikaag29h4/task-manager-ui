@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
 export default function Register() {
   const [form, setForm] = useState({
     name: '', age: '', phone: '', email: '', username: '', password: '', confirm_password: ''
@@ -13,7 +13,7 @@ export default function Register() {
 
   async function handleRegister() {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
+        const res = await fetch(`${API}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
